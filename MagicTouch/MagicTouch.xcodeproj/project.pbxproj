@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF5DCD82264467E300AA11D1 /* BaloonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5DCD81264467E300AA11D1 /* BaloonModel.swift */; };
+		EF5DCD852644693800AA11D1 /* EnemyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5DCD842644693800AA11D1 /* EnemyModel.swift */; };
 		EF7C31602644542000658DEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C315F2644542000658DEE /* AppDelegate.swift */; };
 		EF7C31622644542000658DEE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EF7C31612644542000658DEE /* GameScene.sks */; };
 		EF7C31642644542000658DEE /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EF7C31632644542000658DEE /* Actions.sks */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF5DCD81264467E300AA11D1 /* BaloonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaloonModel.swift; sourceTree = "<group>"; };
+		EF5DCD842644693800AA11D1 /* EnemyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyModel.swift; sourceTree = "<group>"; };
 		EF7C315C2644542000658DEE /* MagicTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagicTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF7C315F2644542000658DEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF7C31612644542000658DEE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -39,6 +43,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF5DCD80264467B600AA11D1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF5DCD81264467E300AA11D1 /* BaloonModel.swift */,
+				EF5DCD842644693800AA11D1 /* EnemyModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		EF7C31532644542000658DEE = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +71,7 @@
 		EF7C315E2644542000658DEE /* MagicTouch */ = {
 			isa = PBXGroup;
 			children = (
+				EF5DCD80264467B600AA11D1 /* Models */,
 				EF7C315F2644542000658DEE /* AppDelegate.swift */,
 				EF7C31612644542000658DEE /* GameScene.sks */,
 				EF7C31632644542000658DEE /* Actions.sks */,
@@ -141,6 +155,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF5DCD82264467E300AA11D1 /* BaloonModel.swift in Sources */,
+				EF5DCD852644693800AA11D1 /* EnemyModel.swift in Sources */,
 				EF7C31662644542000658DEE /* GameScene.swift in Sources */,
 				EF7C31682644542000658DEE /* GameViewController.swift in Sources */,
 				EF7C31602644542000658DEE /* AppDelegate.swift in Sources */,
