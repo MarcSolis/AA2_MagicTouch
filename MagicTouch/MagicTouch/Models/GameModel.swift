@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct GameModel{
-    var score : Int
-    var matchTime : Float
+
+struct GameModel {
+    var score: Int
+    var matchTime: Float
 }
