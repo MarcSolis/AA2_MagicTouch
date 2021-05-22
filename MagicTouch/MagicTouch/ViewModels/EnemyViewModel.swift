@@ -19,10 +19,11 @@ class EnemyViewModel {
         self.view.physicsBody = SKPhysicsBody(circleOfRadius: size.width/4)
         self.view.physicsBody!.affectedByGravity = false
         self.view.physicsBody!.collisionBitMask = 0x00000010
-        self.view.physicsBody!.contactTestBitMask = 0x00000000
+        self.view.physicsBody!.contactTestBitMask = 0x00000100
         self.view.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
         self.view.physicsBody!.friction = 0
         self.view.physicsBody!.linearDamping = 0
+        self.view.zPosition = 1000
        
         self.model.randomInit(
             minBaloon: 1,

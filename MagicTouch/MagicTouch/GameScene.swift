@@ -14,9 +14,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var gameModel: GameModel!
     
     override func didMove(to view: SKView) {
+        
         self.physicsWorld.contactDelegate = self
         
-        self.gameModel = GameModel(matchTime: 0, screenSize: self.size)
+        self.gameModel = GameModel(matchTime: 0, screenSize: self.size, context: self)
         let screenRatio = (self.size.width + self.size.height) * 0.1
         
         (0...self.gameModel.enemyPoolSize).forEach { (index) in
