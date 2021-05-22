@@ -23,7 +23,7 @@ class EnemyModel {
         movementSpeed = CGVector(dx: 0, dy: -80)
     }
 
-    public func randomInit(minBaloon: Int, maxBaloon: Int, enemyPosition: CGPoint, enemySize: CGSize) {
+    public func randomInit(minBaloon: Int, maxBaloon: Int, enemySize: CGSize) {
 
         (0...Int.random(in: minBaloon...maxBaloon)).forEach { (position) in
             let newPoint = CGPoint(x: Double.random(in: (-30.0...30.0)),

@@ -27,21 +27,26 @@ class EnemyViewModel {
         self.model.randomInit(
             minBaloon: 1,
             maxBaloon: 5,
-            enemyPosition: position,
             enemySize: size
         )
     }
     
     public func reuse(initialPos: CGPoint) {
         self.view.position = CGPoint(x: 0,y: 0)
-        self.model.randomInit(minBaloon: 1, maxBaloon: 5, enemyPosition: initialPos, enemySize: self.view.size)
+        self.model.randomInit(minBaloon: 1, maxBaloon: 5, enemySize: self.view.size)
         self.model.active = true
         self.view.physicsBody!.velocity = self.model.movementSpeed
+        (0...self.model.ballons.count-1).forEach { (index) in
+            self.model.ballons[index].setVelocity(velocity: self.model.movementSpeed)
+        }
     }
     
     public func die() {
         self.model.active = false
         self.view.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
+        (0...self.model.ballons.count-1).forEach { (index) in
+            self.model.ballons[index].setVelocity(velocity: CGVector(dx: 0, dy: 0))
+        }
     }
     
     public func addAsChild(context: GameScene){
