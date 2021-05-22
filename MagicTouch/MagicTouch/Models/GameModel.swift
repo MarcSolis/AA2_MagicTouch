@@ -19,7 +19,7 @@ struct GameModel {
     init(matchTime: Float, screenSize: CGSize){
         self.score = 0
         self.matchTime = matchTime
-        self.spawnEnemyPosition = CGPoint(x: 0, y: screenSize.height + 20)
+        self.spawnEnemyPosition = CGPoint(x: 0, y: screenSize.height/2 - 20)
         self.enemyPool = []
     }
     

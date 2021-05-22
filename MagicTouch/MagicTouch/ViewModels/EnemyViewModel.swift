@@ -21,17 +21,19 @@ class EnemyViewModel {
         self.view.physicsBody!.collisionBitMask = 0x00000010
         self.view.physicsBody!.contactTestBitMask = 0x00000000
         self.view.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
+        self.view.physicsBody!.friction = 0
+        self.view.physicsBody!.linearDamping = 0
        
         self.model.randomInit(
             minBaloon: 1,
-            maxBaloon: 10,
+            maxBaloon: 5,
             enemyPosition: position,
             enemySize: size
         )
     }
     
     public func reuse(initialPos: CGPoint) {
-        self.view.position = initialPos
+        self.view.position = CGPoint(x: 0,y: 0)
         self.model.randomInit(minBaloon: 1, maxBaloon: 5, enemyPosition: initialPos, enemySize: self.view.size)
         self.model.active = true
         self.view.physicsBody!.velocity = self.model.movementSpeed
@@ -45,7 +47,7 @@ class EnemyViewModel {
     public func addAsChild(context: GameScene){
         context.addChild(self.view)
         (0...model.ballons.count-1).forEach { (index) in
-            model.ballons[index].addAsChild(context: context)
+            model.ballons[index].addAsChild(context: self.view)
         }
     }
 }

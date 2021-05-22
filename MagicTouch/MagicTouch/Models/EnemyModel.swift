@@ -20,7 +20,7 @@ class EnemyModel {
         points = 0
         ballons = []
         active = false
-        movementSpeed = CGVector(dx: 0, dy: -10)
+        movementSpeed = CGVector(dx: 0, dy: -80)
     }
 
     public func randomInit(minBaloon: Int, maxBaloon: Int, enemyPosition: CGPoint, enemySize: CGSize) {
@@ -29,7 +29,7 @@ class EnemyModel {
             let newPoint = CGPoint(x: Double.random(in: (-30.0...30.0)),
                                    y: Double.random(in: (40...60.0)))
             self.ballons.append(
-                BaloonViewModel(size: CGSize(width: 1*enemySize.width, height: 1*enemySize.height), position: enemyPosition.byAdding(newPoint))
+                BaloonViewModel(size: CGSize(width: 1*enemySize.width, height: 1*enemySize.height), position: newPoint)
             )
         }
 

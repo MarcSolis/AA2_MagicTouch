@@ -23,7 +23,7 @@ class BaloonViewModel {
         self.view.physicsBody!.contactTestBitMask = 0x00000001
     }
     
-    public func addAsChild(context: GameScene){
+    public func addAsChild(context: SKSpriteNode){
         context.addChild(self.view)
     }
 }

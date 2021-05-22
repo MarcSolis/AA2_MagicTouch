@@ -28,12 +28,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             )
             self.gameModel.enemyPool[index].addAsChild(context: self)
         }
+        
+        self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(initialPos: self.gameModel.spawnEnemyPosition)
     }
     
     func getReusableEnemyIndex() -> Int {
         var selectedIndex = -1
         (0...self.gameModel.enemyPoolSize).forEach { (index) in
-            if (self.gameModel.enemyPool[index].model.active) {
+            if (!self.gameModel.enemyPool[index].model.active) {
                 selectedIndex = index
             }
         }
