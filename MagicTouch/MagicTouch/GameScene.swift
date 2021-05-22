@@ -27,8 +27,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     position: CGPoint(x: index*80, y: 0)
                 )
             )
-            self.addChild(self.enemyPool[index].view)
-
+            self.enemyPool[index].addAsChild(context: self)
+            //self.addChild(self.enemyPool[index].view)
         }
     }
 

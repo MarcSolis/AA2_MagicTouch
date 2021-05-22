@@ -16,13 +16,20 @@ class EnemyViewModel {
         self.view = SKSpriteNode(imageNamed: "Enemy")
         self.view.size = size
         self.view.position = position
-        let newPoint = CGPoint(x: Double.random(in: (-1.0...1.0)),
-                               y: Double.random(in: (30.0...50.0)))
+       
         self.model.randomInit(
-            minBaloon: 0,
+            minBaloon: 1,
             maxBaloon: 10,
-            pos: position.byAdding(newPoint)
+            enemyPosition: position,
+            enemySize: size
         )
+    }
+    
+    public func addAsChild(context: GameScene){
+        context.addChild(self.view)
+        (0...model.ballons.count-1).forEach { (index) in
+            model.ballons[index].addAsChild(context: context)
+        }
     }
 }
 

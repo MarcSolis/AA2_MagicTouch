@@ -18,4 +18,8 @@ class BaloonViewModel {
         self.view.size = size
         self.view.position = position
     }
+    
+    public func addAsChild(context: GameScene){
+        context.addChild(self.view)
+    }
 }
