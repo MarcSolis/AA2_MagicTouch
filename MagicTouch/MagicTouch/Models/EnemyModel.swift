@@ -25,6 +25,7 @@ class EnemyModel {
 
     public func randomInit(minBaloon: Int, maxBaloon: Int, enemySize: CGSize) {
 
+        //ballons = []
         (0...Int.random(in: minBaloon...maxBaloon)).forEach { (position) in
             let newPoint = CGPoint(x: Double.random(in: (-30.0...30.0)),
                                    y: Double.random(in: (40...60.0)))

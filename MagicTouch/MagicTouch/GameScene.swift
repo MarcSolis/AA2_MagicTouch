@@ -66,7 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameModel.enemyPool.append(
                 EnemyViewModel(
                     size: CGSize(width: screenRatio, height: screenRatio),
-                    position: self.gameModel.disableEnemyPosition
+                    position: self.gameModel.disableEnemyPosition, disabledPosition: gameModel.disableEnemyPosition
                 )
             )
             self.gameModel.enemyPool[index].addAsChild(context: self)
@@ -83,6 +83,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         return selectedIndex
+    }
+    
+    func destroyBaloons(id: Int){
+        (0...self.gameModel.enemyPoolSize).forEach { (index) in
+            if (self.gameModel.enemyPool[index].model.active) {
+                self.gameModel.enemyPool[index].destroyBallons(id: id)
+            }
+        }
     }
     
     func endGame(){
@@ -118,18 +126,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let node = self.atPoint(t.location(in :self))
             if (node.name == "Button0") {
                 print("Button0")
+                destroyBaloons(id: 0)
             }
             else if (node.name == "Button1") {
                 print("Button1")
+                destroyBaloons(id: 1)
             }
             else if (node.name == "Button2") {
                 print("Button2")
+                destroyBaloons(id: 2)
             }
             else if (node.name == "Button3") {
                 print("Button3")
+                destroyBaloons(id: 3)
             }
             else if (node.name == "Button4") {
                 print("Button4")
+                destroyBaloons(id: 4)
             }
             
           }

@@ -10,9 +10,11 @@ import Foundation
 class EnemyViewModel {
     var model: EnemyModel
     var view: SKSpriteNode
+    let disabledPosition: CGPoint!
 
-    init(size: CGSize, position: CGPoint) {
+    init(size: CGSize, position: CGPoint, disabledPosition: CGPoint) {
         self.model = EnemyModel()
+        self.disabledPosition = disabledPosition
         self.view = SKSpriteNode(imageNamed: "Enemy")
         self.view.isUserInteractionEnabled = false
         self.view.size = size
@@ -32,6 +34,19 @@ class EnemyViewModel {
             maxBaloon: 4,
             enemySize: size
         )
+        
+    }
+    
+    public func destroyBallons(id: Int) {
+        (0...model.ballons.count-1).forEach { (index) in
+            if(model.ballons[index].model.movementId == id){
+                self.model.ballons[index].view.removeFromParent()
+                self.model.ballons.remove(at: index)
+            }
+        }
+        if(model.ballons.count == 0){
+            kill(disablePos: self.disabledPosition)
+        }
     }
     
     public func reuse(initialPos: CGPoint) {
