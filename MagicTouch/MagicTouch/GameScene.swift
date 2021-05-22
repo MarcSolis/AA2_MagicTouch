@@ -17,6 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var enemyPool: [EnemyViewModel]!
 
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
+        
         self.gameModel = GameModel( score: 0, matchTime: 0)
         self.enemyPool = []
         let screenRatio = (self.size.width + self.size.height) * 0.1
@@ -30,6 +32,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.enemyPool[index].addAsChild(context: self)
             //self.addChild(self.enemyPool[index].view)
         }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+
     }
 
     func touchDown(atPoint pos: CGPoint) {
