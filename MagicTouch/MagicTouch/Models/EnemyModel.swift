@@ -29,7 +29,7 @@ class EnemyModel {
             let newPoint = CGPoint(x: Double.random(in: (-30.0...30.0)),
                                    y: Double.random(in: (40...60.0)))
             self.ballons.append(
-                BaloonViewModel(size: CGSize(width: 1*enemySize.width, height: 1*enemySize.height), position: newPoint)
+                BaloonViewModel(size: CGSize(width: 0.5*enemySize.width, height: 0.5*enemySize.height), position: newPoint)
             )
         }
 

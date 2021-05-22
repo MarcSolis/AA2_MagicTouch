@@ -23,8 +23,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         (0...self.gameModel.enemyPoolSize).forEach { (index) in
             self.gameModel.enemyPool.append(
                 EnemyViewModel(
-                    size: CGSize(width: screenRatio/2, height: screenRatio/2),
-                    position: self.gameModel.spawnEnemyPosition
+                    size: CGSize(width: screenRatio, height: screenRatio),
+                    position: self.gameModel.disableEnemyPosition
                 )
             )
             self.gameModel.enemyPool[index].addAsChild(context: self)
@@ -43,8 +43,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return selectedIndex
     }
     
+    func endGame(){
+        
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
-
+        if(contact.bodyA.node?.name == "Ground" &&
+            contact.bodyB.node?.name == "Enemy") {
+            endGame()
+        }
+        
+        if(contact.bodyA.node?.name == "Enemy" &&
+            contact.bodyB.node?.name == "Ground") {
+            endGame()
+        }
     }
 
     func touchDown(atPoint pos: CGPoint) {

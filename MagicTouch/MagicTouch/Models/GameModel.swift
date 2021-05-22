@@ -12,6 +12,7 @@ import GameKit
 struct GameModel {
     var score: Int
     var matchTime: Float
+    let disableEnemyPosition: CGPoint
     let spawnEnemyPosition: CGPoint
     var enemyPool: [EnemyViewModel]!
     let enemyPoolSize = 15
@@ -22,7 +23,8 @@ struct GameModel {
     init(matchTime: Float, screenSize: CGSize, context: GameScene){
         self.score = 0
         self.matchTime = matchTime
-        self.spawnEnemyPosition = CGPoint(x: 0, y: screenSize.height/2 - 20)
+        self.disableEnemyPosition = CGPoint(x: 0, y: -screenSize.height*4)
+        self.spawnEnemyPosition = CGPoint(x: 0, y: screenSize.height/2 + 140)
         self.enemyPool = []
 
         self.background.size = screenSize
@@ -38,6 +40,7 @@ struct GameModel {
         self.ground.anchorPoint = CGPoint(x:0.5, y:0)
         self.ground.position = CGPoint(x: 0, y: -screenSize.height/2+80)
         self.ground.zPosition = 3
+        self.ground.name = "Ground"
         self.ground.physicsBody = SKPhysicsBody(rectangleOf: self.ground.size)
         self.ground.physicsBody!.affectedByGravity = false
         self.ground.physicsBody!.isDynamic = false
