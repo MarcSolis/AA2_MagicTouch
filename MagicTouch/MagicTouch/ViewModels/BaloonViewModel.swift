@@ -15,6 +15,7 @@ class BaloonViewModel {
     init(size: CGSize, position: CGPoint) {
         self.model = Baloon(id: Int.random(in: 0...4))
         self.view = SKSpriteNode(imageNamed: "Baloon")
+        self.view.isUserInteractionEnabled = false
         self.view.size = size
         self.view.position = position
         self.view.color = self.model.baloonColors[self.model.movementId]

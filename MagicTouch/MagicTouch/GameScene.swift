@@ -12,8 +12,50 @@ import CoreMotion
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private var gameModel: GameModel!
+    //debug buttons
+    private var button0: SKShapeNode!
+    private var button1: SKShapeNode!
+    private var button2: SKShapeNode!
+    private var button3: SKShapeNode!
+    private var button4: SKShapeNode!
+
     
     override func didMove(to view: SKView) {
+        let buttonHeight = Int(-self.size.height/2 + 250)
+        self.button0 = SKShapeNode(circleOfRadius: 50)
+        self.button0.fillColor = UIColor.blue
+        self.button0.position = CGPoint(x: Int(-self.size.width/6*2), y: buttonHeight)
+        self.button0.name = "Button0"
+        self.button0.zPosition = 1010
+        self.addChild(self.button0)
+        
+        self.button1 = SKShapeNode(circleOfRadius: 50)
+        self.button1.fillColor = UIColor.red
+        self.button1.position = CGPoint(x: Int(-self.size.width/6*1), y: buttonHeight)
+        self.button1.name = "Button1"
+        self.button1.zPosition = 1010
+        self.addChild(self.button1)
+        
+        self.button2 = SKShapeNode(circleOfRadius: 50)
+        self.button2.fillColor = UIColor.green
+        self.button2.position = CGPoint(x: Int(-self.size.width/6*0), y: buttonHeight)
+        self.button2.name = "Button2"
+        self.button2.zPosition = 1010
+        self.addChild(self.button2)
+        
+        self.button3 = SKShapeNode(circleOfRadius: 50)
+        self.button3.fillColor = UIColor.yellow
+        self.button3.position = CGPoint(x: Int(self.size.width/6*1), y: buttonHeight)
+        self.button3.name = "Button3"
+        self.button3.zPosition = 1010
+        self.addChild(self.button3)
+        
+        self.button4 = SKShapeNode(circleOfRadius: 50)
+        self.button4.fillColor = UIColor.purple
+        self.button4.position = CGPoint(x: Int(self.size.width/6*2), y: buttonHeight)
+        self.button4.name = "Button4"
+        self.button4.zPosition = 1010
+        self.addChild(self.button4)
         
         self.physicsWorld.contactDelegate = self
         
@@ -72,6 +114,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for t in touches {
+            let node = self.atPoint(t.location(in :self))
+            if (node.name == "Button0") {
+                print("Button0")
+            }
+            else if (node.name == "Button1") {
+                print("Button1")
+            }
+            else if (node.name == "Button2") {
+                print("Button2")
+            }
+            else if (node.name == "Button3") {
+                print("Button3")
+            }
+            else if (node.name == "Button4") {
+                print("Button4")
+            }
+            
+          }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

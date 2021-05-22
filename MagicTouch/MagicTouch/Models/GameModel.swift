@@ -30,11 +30,13 @@ struct GameModel {
         self.background.size = screenSize
         self.background.position = CGPoint(x: 0, y: 0)
         self.background.zPosition = 1
+        self.background.isUserInteractionEnabled = false
 
         self.castle.size = CGSize(width: screenSize.width, height: screenSize.width/1.5)
         self.castle.anchorPoint = CGPoint(x:0.5, y:0)
         self.castle.position = CGPoint(x: 0, y: -screenSize.height/2+80)
         self.castle.zPosition = 2
+        self.castle.isUserInteractionEnabled = false
 
         self.ground.size = CGSize(width: screenSize.width, height: screenSize.width/9)
         self.ground.anchorPoint = CGPoint(x:0.5, y:0)
@@ -45,6 +47,7 @@ struct GameModel {
         self.ground.physicsBody!.affectedByGravity = false
         self.ground.physicsBody!.isDynamic = false
         self.ground.physicsBody!.collisionBitMask = 0x00000100
+        self.ground.isUserInteractionEnabled = false
 
         
         context.addChild(self.castle)

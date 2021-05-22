@@ -14,6 +14,7 @@ class EnemyViewModel {
     init(size: CGSize, position: CGPoint) {
         self.model = EnemyModel()
         self.view = SKSpriteNode(imageNamed: "Enemy")
+        self.view.isUserInteractionEnabled = false
         self.view.size = size
         self.view.position = position
         self.view.name = "Enemy"
