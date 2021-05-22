@@ -11,27 +11,33 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
-    private let enemyPoolSize = 15
-
     private var gameModel: GameModel!
-    private var enemyPool: [EnemyViewModel]!
-
+    
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
         
-        self.gameModel = GameModel( score: 0, matchTime: 0)
-        self.enemyPool = []
+        self.gameModel = GameModel(matchTime: 0, screenSize: self.size)
         let screenRatio = (self.size.width + self.size.height) * 0.1
-        (0...enemyPoolSize).forEach { (index) in
-            self.enemyPool.append(
+        
+        (0...self.gameModel.enemyPoolSize).forEach { (index) in
+            self.gameModel.enemyPool.append(
                 EnemyViewModel(
                     size: CGSize(width: screenRatio/2, height: screenRatio/2),
-                    position: CGPoint(x: index*80, y: 0)
+                    position: self.gameModel.spawnEnemyPosition
                 )
             )
-            self.enemyPool[index].addAsChild(context: self)
-            //self.addChild(self.enemyPool[index].view)
+            self.gameModel.enemyPool[index].addAsChild(context: self)
         }
+    }
+    
+    func getReusableEnemyIndex() -> Int {
+        var selectedIndex = -1
+        (0...self.gameModel.enemyPoolSize).forEach { (index) in
+            if (self.gameModel.enemyPool[index].model.active) {
+                selectedIndex = index
+            }
+        }
+        return selectedIndex
     }
     
     func didBegin(_ contact: SKPhysicsContact) {

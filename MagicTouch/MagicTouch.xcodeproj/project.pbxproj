@@ -95,8 +95,8 @@
 		EFA6DB36265435930037FA21 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */,
 				EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */,
+				EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

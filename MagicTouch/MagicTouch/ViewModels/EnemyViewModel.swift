@@ -16,6 +16,11 @@ class EnemyViewModel {
         self.view = SKSpriteNode(imageNamed: "Enemy")
         self.view.size = size
         self.view.position = position
+        self.view.physicsBody = SKPhysicsBody(circleOfRadius: size.width/4)
+        self.view.physicsBody!.affectedByGravity = false
+        self.view.physicsBody!.collisionBitMask = 0x00000010
+        self.view.physicsBody!.contactTestBitMask = 0x00000000
+        self.view.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
        
         self.model.randomInit(
             minBaloon: 1,
@@ -23,6 +28,18 @@ class EnemyViewModel {
             enemyPosition: position,
             enemySize: size
         )
+    }
+    
+    public func reuse(initialPos: CGPoint) {
+        self.view.position = initialPos
+        self.model.randomInit(minBaloon: 1, maxBaloon: 5, enemyPosition: initialPos, enemySize: self.view.size)
+        self.model.active = true
+        self.view.physicsBody!.velocity = self.model.movementSpeed
+    }
+    
+    public func die() {
+        self.model.active = false
+        self.view.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
     }
     
     public func addAsChild(context: GameScene){

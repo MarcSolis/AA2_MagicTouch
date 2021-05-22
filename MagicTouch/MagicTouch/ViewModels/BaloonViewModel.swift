@@ -17,7 +17,7 @@ class BaloonViewModel {
         self.view = SKSpriteNode(imageNamed: "Baloon_Pink")
         self.view.size = size
         self.view.position = position
-        self.view.physicsBody = SKPhysicsBody(texture: self.view.texture!, size: self.view.size)
+        self.view.physicsBody = SKPhysicsBody(circleOfRadius: size.width/4)
         self.view.physicsBody!.affectedByGravity = false
         self.view.physicsBody!.collisionBitMask = 0x00000001
         self.view.physicsBody!.contactTestBitMask = 0x00000001

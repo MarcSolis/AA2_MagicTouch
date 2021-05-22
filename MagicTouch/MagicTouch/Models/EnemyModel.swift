@@ -12,11 +12,15 @@ class EnemyModel {
     var ballons = [BaloonViewModel]()
     var skinId: Int
     var points: Int
+    var active: Bool
+    let movementSpeed: CGVector
 
     init() {
         skinId = 0
         points = 0
         ballons = []
+        active = false
+        movementSpeed = CGVector(dx: 0, dy: -10)
     }
 
     public func randomInit(minBaloon: Int, maxBaloon: Int, enemyPosition: CGPoint, enemySize: CGSize) {
