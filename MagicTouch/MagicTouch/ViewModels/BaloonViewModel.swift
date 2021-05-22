@@ -13,10 +13,12 @@ class BaloonViewModel {
     var view: SKSpriteNode
 
     init(size: CGSize, position: CGPoint) {
-        self.model = Baloon(id: 0)
+        self.model = Baloon(id: Int.random(in: 0...4))
         self.view = SKSpriteNode(imageNamed: "Baloon")
         self.view.size = size
         self.view.position = position
+        self.view.color = self.model.baloonColors[self.model.movementId]
+        self.view.colorBlendFactor = 1
         self.view.physicsBody = SKPhysicsBody(circleOfRadius: size.width/2)
         self.view.physicsBody!.affectedByGravity = false
         self.view.physicsBody!.collisionBitMask = 0x00000001

@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 
+
 class Baloon {
-    var color: UIColor!
+    let baloonColors: [UIColor] = [
+        UIColor.blue, UIColor.red, UIColor.green, UIColor.yellow, UIColor.purple
+    ]
     var movementId: Int!
     var hidden: Bool!
 
     public init(id: Int, hidden: Bool = false) {
-        self.color = UIColor(red: CGFloat(id), green: CGFloat(id), blue: CGFloat(id), alpha: CGFloat(id))
         self.movementId = id
         self.hidden = hidden
     }
