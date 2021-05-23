@@ -37,7 +37,7 @@ class EnemyViewModel {
         
     }
     
-    public func destroyBallons(id: Int) {
+    public func destroyBallons(id: Int) -> Int {
         (0...model.ballons.count-1).forEach { (index) in
             if(model.ballons[index].model.movementId == id &&
                 !self.model.ballons[index].view.isHidden) {
@@ -47,7 +47,9 @@ class EnemyViewModel {
         }
         if(self.model.activeBaloons <= 0){
             kill(disablePos: self.disabledPosition)
+            return self.model.points
         }
+        return 0
     }
     
     public func reuse(initialPos: CGPoint) {

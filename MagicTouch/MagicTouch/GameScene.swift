@@ -18,9 +18,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var button2: SKShapeNode!
     private var button3: SKShapeNode!
     private var button4: SKShapeNode!
+    private var score: SKLabelNode!
 
     
     override func didMove(to view: SKView) {
+        
         let buttonHeight = Int(-self.size.height/2 + 250)
         self.button0 = SKShapeNode(circleOfRadius: 50)
         self.button0.fillColor = UIColor.blue
@@ -72,6 +74,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameModel.enemyPool[index].addAsChild(context: self)
         }
         
+        self.score = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        self.score.text = ("Score: " + String(self.gameModel.score))
+        self.score.position = CGPoint(x: 0, y: self.size.height/2 - 200)
+        self.score.zPosition = 2000
+        self.score.fontColor = UIColor.black
+        
+        
+        self.addChild(self.score)
+        
         let increaseTimeAction = SKAction.run {
             self.gameModel.time += self.gameModel.timeRefreshRate
         }
@@ -84,7 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func getReusableEnemyIndex() -> Int {
-        var selectedIndex = -1
+        var selectedIndex = 0
         (0...self.gameModel.enemyPoolSize).forEach { (index) in
             if (!self.gameModel.enemyPool[index].model.active) {
                 selectedIndex = index
@@ -96,13 +107,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func destroyBaloons(id: Int){
         (0...self.gameModel.enemyPoolSize).forEach { (index) in
             if (self.gameModel.enemyPool[index].model.active) {
-                self.gameModel.enemyPool[index].destroyBallons(id: id)
+                self.gameModel.score += self.gameModel.enemyPool[index].destroyBallons(id: id)
             }
         }
     }
     
     func endGame(){
         
+    }
+    
+    func updateScore(){
+        self.score.text = "Score: " + String(self.gameModel.score)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -135,22 +150,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (node.name == "Button0") {
                 print("Button0")
                 destroyBaloons(id: 0)
+                updateScore()
             }
             else if (node.name == "Button1") {
                 print("Button1")
                 destroyBaloons(id: 1)
+                updateScore()
             }
             else if (node.name == "Button2") {
                 print("Button2")
                 destroyBaloons(id: 2)
+                updateScore()
             }
             else if (node.name == "Button3") {
                 print("Button3")
                 destroyBaloons(id: 3)
+                updateScore()
             }
             else if (node.name == "Button4") {
                 print("Button4")
                 destroyBaloons(id: 4)
+                updateScore()
             }
             
           }

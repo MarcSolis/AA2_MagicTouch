@@ -45,5 +45,6 @@ class EnemyModel {
             self.ballons[index].reuse()
             activeBaloons+=1
         }
+        points = activeBaloons
     }
 }
