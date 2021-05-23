@@ -78,7 +78,6 @@ class EnemyViewModel {
 }
 
 extension CGPoint {
-    
     func byAdding(_ point: CGPoint) -> CGPoint {
         return CGPoint(x: self.x + point.x, y: self.y + point.y)
     }

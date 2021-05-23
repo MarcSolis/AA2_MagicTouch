@@ -58,7 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.button4)
         
         self.physicsWorld.contactDelegate = self
-        
+
         self.gameModel = GameModel(matchTime: 0, screenSize: self.size, context: self)
         let screenRatio = (self.size.width + self.size.height) * 0.1
         
@@ -72,7 +72,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameModel.enemyPool[index].addAsChild(context: self)
         }
         
-        self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(initialPos: self.gameModel.spawnEnemyPosition)
+        let increaseTimeAction = SKAction.run {
+            self.gameModel.time += self.gameModel.timeRefreshRate
+        }
+        let waitForTimeAction = SKAction.wait(forDuration: TimeInterval(self.gameModel.timeRefreshRate))
+        let timerActionGroup = SKAction.group([increaseTimeAction, waitForTimeAction])
+        let runTimerAction = SKAction.repeatForever(timerActionGroup)
+        run(runTimerAction, withKey: "TimerAction")
+        
+        //self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(initialPos: self.gameModel.spawnEnemyPosition)
     }
     
     func getReusableEnemyIndex() -> Int {
@@ -161,6 +169,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        if(self.gameModel.time - self.gameModel.lastSpawnedTime >= self.gameModel.spawnInterval){
+            self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(initialPos: self.gameModel.spawnEnemyPosition)
+            self.gameModel.lastSpawnedTime = self.gameModel.time
+            self.gameModel.spawnInterval = Float.random(in: 2...5)
+        }
     }
 }

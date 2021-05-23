@@ -11,7 +11,7 @@ import GameKit
 
 struct GameModel {
     var score: Int
-    var matchTime: Float
+    var matchDuration: Float
     let disableEnemyPosition: CGPoint
     let spawnEnemyPosition: CGPoint
     var enemyPool: [EnemyViewModel]!
@@ -19,10 +19,14 @@ struct GameModel {
     let background = SKSpriteNode(imageNamed: "Background")
     let castle = SKSpriteNode(imageNamed: "Castle")
     let ground = SKSpriteNode(imageNamed: "Ground")
+    var time: Float = 0.0
+    let timeRefreshRate: Float = 1.0
+    var lastSpawnedTime: Float = 0.0
+    var spawnInterval: Float = 0.0
     
     init(matchTime: Float, screenSize: CGSize, context: GameScene){
         self.score = 0
-        self.matchTime = matchTime
+        self.matchDuration = matchTime
         self.disableEnemyPosition = CGPoint(x: 0, y: -screenSize.height*4)
         self.spawnEnemyPosition = CGPoint(x: 0, y: screenSize.height/2 + 140)
         self.enemyPool = []
