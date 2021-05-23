@@ -27,6 +27,7 @@ class BaloonViewModel {
         self.view.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
         self.view.physicsBody!.friction = 0
         self.view.physicsBody!.linearDamping = 0
+        self.view.isHidden = true
     }
     
     public func setVelocity(velocity: CGVector){
@@ -35,5 +36,15 @@ class BaloonViewModel {
     
     public func addAsChild(context: SKSpriteNode){
         context.addChild(self.view)
+    }
+    
+    public func reuse(){
+        self.view.isHidden = false
+        self.model.movementId = Int.random(in: 0...4)
+        self.view.color = self.model.baloonColors[self.model.movementId]
+
+        let newPoint = CGPoint(x: Double.random(in: (-30.0...30.0)),
+                               y: Double.random(in: (40...60.0)))
+        self.view.position = newPoint
     }
 }

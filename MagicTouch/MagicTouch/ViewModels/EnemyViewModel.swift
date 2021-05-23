@@ -39,19 +39,20 @@ class EnemyViewModel {
     
     public func destroyBallons(id: Int) {
         (0...model.ballons.count-1).forEach { (index) in
-            if(model.ballons[index].model.movementId == id){
-                self.model.ballons[index].view.removeFromParent()
-                self.model.ballons.remove(at: index)
+            if(model.ballons[index].model.movementId == id &&
+                !self.model.ballons[index].view.isHidden) {
+                self.model.ballons[index].view.isHidden = true
+                self.model.activeBaloons -= 1
             }
         }
-        if(model.ballons.count == 0){
+        if(self.model.activeBaloons <= 0){
             kill(disablePos: self.disabledPosition)
         }
     }
     
     public func reuse(initialPos: CGPoint) {
         self.view.position = initialPos
-        self.model.randomInit(minBaloon: 1, maxBaloon: 4, enemySize: self.view.size)
+        self.model.reuseBaloons()
         self.model.active = true
         self.view.physicsBody!.velocity = self.model.movementSpeed
         (0...self.model.ballons.count-1).forEach { (index) in
