@@ -17,6 +17,8 @@
 		EF7C31682644542000658DEE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7C31672644542000658DEE /* GameViewController.swift */; };
 		EF7C316B2644542000658DEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF7C31692644542000658DEE /* Main.storyboard */; };
 		EF7C316D2644542000658DEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF7C316C2644542000658DEE /* Assets.xcassets */; };
+		EF894C26265A5BDB00BBD7DF /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF894C25265A5BDB00BBD7DF /* MainMenu.swift */; };
+		EF894C29265A5BF500BBD7DF /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = EF894C28265A5BF500BBD7DF /* MainMenu.sks */; };
 		EFA6DB38265435B60037FA21 /* EnemyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */; };
 		EFA6DB3B265437530037FA21 /* BaloonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,8 @@
 		EF7C316A2644542000658DEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF7C316C2644542000658DEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF7C316E2644542000658DEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF894C25265A5BDB00BBD7DF /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		EF894C28265A5BF500BBD7DF /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyViewModel.swift; sourceTree = "<group>"; };
 		EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaloonViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +92,8 @@
 				EF7C31692644542000658DEE /* Main.storyboard */,
 				EF7C316C2644542000658DEE /* Assets.xcassets */,
 				EF7C316E2644542000658DEE /* Info.plist */,
+				EF894C25265A5BDB00BBD7DF /* MainMenu.swift */,
+				EF894C28265A5BF500BBD7DF /* MainMenu.sks */,
 			);
 			path = MagicTouch;
 			sourceTree = "<group>";
@@ -166,6 +172,7 @@
 				EF7C316B2644542000658DEE /* Main.storyboard in Resources */,
 				EF7C31622644542000658DEE /* GameScene.sks in Resources */,
 				EF7C316D2644542000658DEE /* Assets.xcassets in Resources */,
+				EF894C29265A5BF500BBD7DF /* MainMenu.sks in Resources */,
 				EF7C31642644542000658DEE /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF5DCD82264467E300AA11D1 /* BaloonModel.swift in Sources */,
+				EF894C26265A5BDB00BBD7DF /* MainMenu.swift in Sources */,
 				EF5DCD852644693800AA11D1 /* EnemyModel.swift in Sources */,
 				EF7C31662644542000658DEE /* GameScene.swift in Sources */,
 				EF7C31682644542000658DEE /* GameViewController.swift in Sources */,
