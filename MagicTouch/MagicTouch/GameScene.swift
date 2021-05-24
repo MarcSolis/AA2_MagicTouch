@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var button3: SKShapeNode!
     private var button4: SKShapeNode!
     private var score: SKLabelNode!
+    private var multiplierText: SKLabelNode!
 
 
     override func didMove(to view: SKView) {
@@ -80,9 +81,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.score.position = CGPoint(x: 0, y: self.size.height/2 - 200)
         self.score.zPosition = 2000
         self.score.fontColor = UIColor.black
-        
-        
         self.addChild(self.score)
+        
+        self.multiplierText = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        self.multiplierText.text = "x" + String(1)
+        self.multiplierText.position = CGPoint(x: 200, y: self.size.height/2 - 400)
+        self.multiplierText.zPosition = 2000
+        self.multiplierText.fontColor = UIColor.white
+        self.addChild(self.multiplierText)
         
         let increaseTimeAction = SKAction.run {
             self.gameModel.time += self.gameModel.timeRefreshRate
@@ -105,11 +111,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func destroyBaloons(id: Int){
+        var simultaneousEnemiesKilled: Int = 0
+        var accumulatedExtraScore: Int = 0
         (0...self.gameModel.enemyPoolSize).forEach { (index) in
             if (self.gameModel.enemyPool[index].model.active) {
-                self.gameModel.score += self.gameModel.enemyPool[index].destroyBallons(id: id)
+                let extraScore = self.gameModel.enemyPool[index].destroyBallons(id: id)
+                if (extraScore > 0){
+                    simultaneousEnemiesKilled += 1
+                    accumulatedExtraScore += extraScore
+                }
+                
             }
         }
+        if(accumulatedExtraScore > 1) {
+            self.multiplierText.text = "x" + String(simultaneousEnemiesKilled)
+        }
+        accumulatedExtraScore *= simultaneousEnemiesKilled
+        self.gameModel.score += accumulatedExtraScore
     }
     
     func endGame(){
