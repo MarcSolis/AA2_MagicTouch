@@ -92,7 +92,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let runTimerAction = SKAction.repeatForever(timerActionGroup)
         run(runTimerAction, withKey: "TimerAction")
         
-        //self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(initialPos: self.gameModel.spawnEnemyPosition)
     }
     
     func getReusableEnemyIndex() -> Int {
@@ -114,6 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame(){
+        gameSceneController.refreshScore(newScore: gameModel.score)
         gameSceneController.loadScene(sceneName: "MainMenu")
     }
     

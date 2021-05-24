@@ -10,24 +10,12 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    public var maxScore :Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let view = self.view as? SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                // Present the scene
-                view?.presentScene(scene)
-            }
-            
-            (view?.scene as! GameScene).gameSceneController = self
-
-            view?.ignoresSiblingOrder = true
-            view?.showsFPS = true
-            view?.showsNodeCount = true
-        }
+        loadScene(sceneName: "MainMenu")
     }
     
     public func loadScene(sceneName: String){
@@ -36,11 +24,17 @@ class GameViewController: UIViewController {
             if let scene = SKScene(fileNamed: sceneName) {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                if(sceneName == "GameScene"){
-                    (scene as! GameScene).gameSceneController = self
-                }
+                
                 // Present the scene
                 view?.presentScene(scene)
+            }
+            
+            if(sceneName == "GameScene") {
+                (view?.scene as! GameScene).gameSceneController = self
+            }
+            else if(sceneName == "MainMenu") {
+                (view?.scene as! MainMenu).gameSceneController = self
+                (view?.scene as! MainMenu).showScore(score: maxScore)
             }
 
             view?.ignoresSiblingOrder = true
@@ -48,9 +42,13 @@ class GameViewController: UIViewController {
             view?.showsNodeCount = true
         }
     }
+    
+    public func refreshScore(newScore: Int){
+        maxScore = max(maxScore, newScore)
+    }
 
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
