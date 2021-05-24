@@ -12,6 +12,7 @@ import CoreMotion
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private var gameModel: GameModel!
+    public var gameSceneController: GameViewController!
     //debug buttons
     private var button0: SKShapeNode!
     private var button1: SKShapeNode!
@@ -20,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var button4: SKShapeNode!
     private var score: SKLabelNode!
 
-    
+
     override func didMove(to view: SKView) {
         
         let buttonHeight = Int(-self.size.height/2 + 250)
@@ -113,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func endGame(){
-        
+        gameSceneController.loadScene(sceneName: "MainMenu")
     }
     
     func updateScore(){
