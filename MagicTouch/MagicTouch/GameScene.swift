@@ -89,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.multiplierText.zPosition = 2000
         self.multiplierText.fontColor = UIColor.white
         self.addChild(self.multiplierText)
-        
+
         let increaseTimeAction = SKAction.run {
             self.gameModel.time += self.gameModel.timeRefreshRate
         }
@@ -97,7 +97,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let timerActionGroup = SKAction.group([increaseTimeAction, waitForTimeAction])
         let runTimerAction = SKAction.repeatForever(timerActionGroup)
         run(runTimerAction, withKey: "TimerAction")
-        
     }
     
     func getReusableEnemyIndex() -> Int {
@@ -152,7 +151,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func touchDown(atPoint pos: CGPoint) {
-
+        
     }
 
     func touchMoved(toPoint pos: CGPoint) {
@@ -191,8 +190,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 destroyBaloons(id: 4)
                 updateScore()
             }
+            else{
+                let freeform = UIBezierPath()
+                freeform.move(to: .zero)
+                freeform.addLine(to: CGPoint(x: 50, y: 50))
+                freeform.addLine(to: CGPoint(x: 50, y: 150))
+                freeform.addLine(to: CGPoint(x: 150, y: 50))
+                freeform.addLine(to: .zero)
+                let image = renderPath(path: freeform, size: CGSize(width: 100, height: 100))
+                let myNode = SKSpriteNode(texture: SKTexture(image: image!))
+                myNode.zPosition = 2020
+                self.addChild(myNode)
+                //freeform.lineWidth = 10
+                //freeform.stroke()
+                //let mySKNode = SKShapeNode(path: freeform.cgPath)
+                //mySKNode.lineWidth = 10
+                //mySKNode.strokeColor = UIColor.black
+                //mySKNode.zPosition = 2020
+                //self.addChild(mySKNode)
+            }
             
           }
+    }
+    
+    func renderPath(path: UIBezierPath, size: CGSize) -> UIImage? {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            UIColor.black.setStroke()
+            path.lineWidth = 10
+            path.stroke()
+        }
+        
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
