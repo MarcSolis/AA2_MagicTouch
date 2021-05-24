@@ -190,14 +190,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 destroyBaloons(id: 4)
                 updateScore()
             }
-            else{
+            else {
                 let freeform = UIBezierPath()
                 freeform.move(to: .zero)
-                freeform.addLine(to: CGPoint(x: 50, y: 50))
-                freeform.addLine(to: CGPoint(x: 50, y: 150))
-                freeform.addLine(to: CGPoint(x: 150, y: 50))
-                freeform.addLine(to: .zero)
-                let image = renderPath(path: freeform, size: CGSize(width: 100, height: 100))
+                freeform.addLine(to: CGPoint(x: 10, y: self.size.height-550))
+                //freeform.addLine(to: CGPoint(x: -100, y: 400))
+                //freeform.addLine(to: CGPoint(x: 60, y: 50))
+                //freeform.addLine(to: .zero)
+                let image = renderPath(path: freeform, size: CGSize(width: self.size.width, height: self.size.height))
+                
                 let myNode = SKSpriteNode(texture: SKTexture(image: image!))
                 myNode.zPosition = 2020
                 self.addChild(myNode)
@@ -220,6 +221,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             path.stroke()
         }
         
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
+
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
