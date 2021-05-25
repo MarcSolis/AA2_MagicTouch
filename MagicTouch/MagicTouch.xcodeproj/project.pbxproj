@@ -21,6 +21,7 @@
 		EF894C29265A5BF500BBD7DF /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = EF894C28265A5BF500BBD7DF /* MainMenu.sks */; };
 		EFA6DB38265435B60037FA21 /* EnemyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */; };
 		EFA6DB3B265437530037FA21 /* BaloonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */; };
+		EFAFDF8D265D782C00E235CC /* UIImage+Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		EF894C28265A5BF500BBD7DF /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyViewModel.swift; sourceTree = "<group>"; };
 		EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaloonViewModel.swift; sourceTree = "<group>"; };
+		EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Shapes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		EF7C315E2644542000658DEE /* MagicTouch */ = {
 			isa = PBXGroup;
 			children = (
+				EFAFDF8B265D780700E235CC /* Extensions */,
 				EFA6DB36265435930037FA21 /* ViewModels */,
 				EF5DCD80264467B600AA11D1 /* Models */,
 				EF7C315F2644542000658DEE /* AppDelegate.swift */,
@@ -105,6 +108,14 @@
 				EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EFAFDF8B265D780700E235CC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF5DCD82264467E300AA11D1 /* BaloonModel.swift in Sources */,
+				EFAFDF8D265D782C00E235CC /* UIImage+Shapes.swift in Sources */,
 				EF894C26265A5BDB00BBD7DF /* MainMenu.swift in Sources */,
 				EF5DCD852644693800AA11D1 /* EnemyModel.swift in Sources */,
 				EF7C31662644542000658DEE /* GameScene.swift in Sources */,

@@ -232,6 +232,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             path.stroke()
         }
     }
+    
+
 
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
 
@@ -266,11 +268,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        guard let image = UIImage.shapeImageWithBezierPath(bezierPath: self.gameModel.bezierPath, fillColor: .clear, strokeColor: .red, strokeWidth: 10) else { return }
+        
+        let myNode = SKSpriteNode(texture: SKTexture(image: image))
+        myNode.zPosition = 2020
+        self.addChild(myNode)
+
         self.gameModel.freeformNode.removeFromParent()
         self.gameModel.bezierPath = UIBezierPath()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        let image = renderPath(path: self.gameModel.bezierPath, size: self.size)
+
+        let myNode = SKSpriteNode(texture: SKTexture(image: image!))
+        myNode.zPosition = 2020
+        self.addChild(myNode)
+
         self.gameModel.freeformNode.removeFromParent()
         self.gameModel.bezierPath = UIBezierPath()
     }
