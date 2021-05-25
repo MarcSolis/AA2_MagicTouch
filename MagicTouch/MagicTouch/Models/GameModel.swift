@@ -8,7 +8,6 @@
 import Foundation
 import GameKit
 
-
 struct GameModel {
     var score: Int
     var matchDuration: Float
@@ -23,13 +22,25 @@ struct GameModel {
     let timeRefreshRate: Float = 1.0
     var lastSpawnedTime: Float = 0.0
     var spawnInterval: Float = 0.0
-    
-    init(matchTime: Float, screenSize: CGSize, context: GameScene){
+    var strokePoints: [CGPoint]!
+    var bezierPath: UIBezierPath!
+    var freeformNode: SKShapeNode!
+
+    init(matchTime: Float, screenSize: CGSize, context: GameScene) {
         self.score = 0
         self.matchDuration = matchTime
         self.disableEnemyPosition = CGPoint(x: 0, y: -screenSize.height*4)
         self.spawnEnemyPosition = CGPoint(x: 0, y: screenSize.height/2 + 140)
         self.enemyPool = []
+
+        self.freeformNode = SKShapeNode()
+        self.freeformNode.zPosition = 2020
+        self.freeformNode.strokeColor = UIColor.green
+        self.freeformNode.lineWidth = 10
+        context.addChild(self.freeformNode)
+
+        self.strokePoints = []
+        self.bezierPath = UIBezierPath()
 
         self.background.size = screenSize
         self.background.position = CGPoint(x: 0, y: 0)
@@ -37,13 +48,13 @@ struct GameModel {
         self.background.isUserInteractionEnabled = false
 
         self.castle.size = CGSize(width: screenSize.width, height: screenSize.width/1.5)
-        self.castle.anchorPoint = CGPoint(x:0.5, y:0)
+        self.castle.anchorPoint = CGPoint(x: 0.5, y: 0)
         self.castle.position = CGPoint(x: 0, y: -screenSize.height/2+80)
         self.castle.zPosition = 2
         self.castle.isUserInteractionEnabled = false
 
         self.ground.size = CGSize(width: screenSize.width, height: screenSize.width/9)
-        self.ground.anchorPoint = CGPoint(x:0.5, y:0)
+        self.ground.anchorPoint = CGPoint(x: 0.5, y: 0)
         self.ground.position = CGPoint(x: 0, y: -screenSize.height/2+80)
         self.ground.zPosition = 3
         self.ground.name = "Ground"
@@ -53,10 +64,8 @@ struct GameModel {
         self.ground.physicsBody!.collisionBitMask = 0x00000100
         self.ground.isUserInteractionEnabled = false
 
-        
         context.addChild(self.castle)
         context.addChild(self.background)
         context.addChild(self.ground)
     }
-    
 }

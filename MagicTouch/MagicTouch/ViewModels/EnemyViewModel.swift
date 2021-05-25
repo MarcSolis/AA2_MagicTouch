@@ -28,30 +28,30 @@ class EnemyViewModel {
         self.view.physicsBody!.friction = 0
         self.view.physicsBody!.linearDamping = 0
         self.view.zPosition = 1000
-       
+
         self.model.randomInit(
             minBaloon: 1,
             maxBaloon: 4,
             enemySize: size
         )
-        
+
     }
-    
-    public func destroyBallons(id: Int) -> Int {
+
+    public func destroyBallons(identifier: Int) -> Int {
         (0...model.ballons.count-1).forEach { (index) in
-            if(model.ballons[index].model.movementId == id &&
-                !self.model.ballons[index].view.isHidden) {
+            if model.ballons[index].model.movementId == identifier &&
+                !self.model.ballons[index].view.isHidden {
                 self.model.ballons[index].view.isHidden = true
                 self.model.activeBaloons -= 1
             }
         }
-        if(self.model.activeBaloons <= 0){
+        if self.model.activeBaloons <= 0 {
             kill(disablePos: self.disabledPosition)
             return self.model.points
         }
         return 0
     }
-    
+
     public func reuse(initialPos: CGPoint) {
         self.view.position = initialPos
         self.model.reuseBaloons()
@@ -61,7 +61,7 @@ class EnemyViewModel {
             self.model.ballons[index].setVelocity(velocity: self.model.movementSpeed)
         }
     }
-    
+
     public func kill(disablePos: CGPoint) {
         self.view.position = disablePos
         self.model.active = false
@@ -70,8 +70,8 @@ class EnemyViewModel {
             self.model.ballons[index].setVelocity(velocity: CGVector(dx: 0, dy: 0))
         }
     }
-    
-    public func addAsChild(context: GameScene){
+
+    public func addAsChild(context: GameScene) {
         context.addChild(self.view)
         (0...model.ballons.count-1).forEach { (index) in
             model.ballons[index].addAsChild(context: self.view)

@@ -13,7 +13,7 @@ class BaloonViewModel {
     var view: SKSpriteNode
 
     init(size: CGSize, position: CGPoint) {
-        self.model = Baloon(id: Int.random(in: 0...4))
+        self.model = Baloon(identifer: Int.random(in: 0...4))
         self.view = SKSpriteNode(imageNamed: "Baloon")
         self.view.isUserInteractionEnabled = false
         self.view.size = size
@@ -29,16 +29,16 @@ class BaloonViewModel {
         self.view.physicsBody!.linearDamping = 0
         self.view.isHidden = true
     }
-    
-    public func setVelocity(velocity: CGVector){
+
+    public func setVelocity(velocity: CGVector) {
         self.view.physicsBody!.velocity = velocity
     }
-    
-    public func addAsChild(context: SKSpriteNode){
+
+    public func addAsChild(context: SKSpriteNode) {
         context.addChild(self.view)
     }
-    
-    public func reuse(){
+
+    public func reuse() {
         self.view.isHidden = false
         self.model.movementId = Int.random(in: 0...4)
         self.view.color = self.model.baloonColors[self.model.movementId]

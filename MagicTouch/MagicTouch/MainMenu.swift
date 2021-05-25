@@ -13,7 +13,7 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
     private var playButton: SKShapeNode!
     private var playButtonText: SKLabelNode!
     private var scoreText: SKLabelNode!
-    
+
     override func didMove(to view: SKView) {
         self.playButton = SKShapeNode(rect: CGRect(x: -150, y: -75, width: 300, height: 150))
         self.playButton.fillColor = UIColor.blue
@@ -21,7 +21,7 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
         self.playButton.name = "playButton"
         self.playButton.zPosition = 1010
         self.addChild(self.playButton)
-        
+
         self.playButtonText = SKLabelNode(fontNamed: "AvenirNext-Bold")
         self.playButtonText.text = "Play"
         self.playButtonText.name = "playButton"
@@ -30,7 +30,7 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
         self.playButtonText.position = CGPoint(x: 0, y: -20)
         self.playButtonText.fontSize = 60
         self.playButtonText.isUserInteractionEnabled = false
-        
+
         self.scoreText = SKLabelNode(fontNamed: "AvenirNext-Bold")
         self.scoreText.fontColor = UIColor.white
         self.addChild(self.scoreText)
@@ -38,11 +38,11 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
         self.scoreText.fontSize = 40
         self.scoreText.isUserInteractionEnabled = false
     }
-    
+
     public func showScore(score: Int) {
         self.scoreText.text = "Score: " + String(score)
     }
-    
+
     func touchDown(atPoint pos: CGPoint) {
 
     }
@@ -56,9 +56,9 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches {
-            let node = self.atPoint(t.location(in :self))
-            if (node.name == "playButton") {
+        for touch in touches {
+            let node = self.atPoint(touch.location(in: self))
+            if node.name == "playButton" {
                 print("playButton")
                 self.gameSceneController.loadScene(sceneName: "GameScene")
             }
@@ -78,6 +78,6 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        
+
     }
 }

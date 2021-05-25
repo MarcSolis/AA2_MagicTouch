@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class Baloon {
     let baloonColors: [UIColor] = [
         UIColor.blue, UIColor.red, UIColor.green, UIColor.yellow, UIColor.purple
@@ -16,8 +15,8 @@ class Baloon {
     var movementId: Int!
     var hidden: Bool!
 
-    public init(id: Int, hidden: Bool = false) {
-        self.movementId = id
+    public init(identifer: Int, hidden: Bool = false) {
+        self.movementId = identifer
         self.hidden = hidden
     }
 }
