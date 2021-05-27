@@ -29,10 +29,8 @@ class BaloonViewModel {
         self.view.physicsBody!.friction = 0
         self.view.physicsBody!.linearDamping = 0
         self.view.isHidden = true
-        
-        self.displayNumber = SKLabelNode(text: String(self.model.number))
-        self.displayNumber.zPosition = self.view.zPosition + CGFloat(1)
-        self.view.addChild(displayNumber)
+
+        displayBaloonNumber()
     }
 
     public func setVelocity(velocity: CGVector) {
@@ -49,13 +47,21 @@ class BaloonViewModel {
         self.view.color = self.model.baloonColors[self.model.movementId]!
         self.model.number = self.model.displayNumberPerID[self.model.movementId]
         self.displayNumber.removeFromParent()
-        
-        self.displayNumber = SKLabelNode(text: String(self.model.number))
-        self.displayNumber.zPosition = self.view.zPosition + CGFloat(1)
-        self.view.addChild(displayNumber)
-        
+
+        displayBaloonNumber()
+
         let newPoint = CGPoint(x: Double.random(in: (-30.0...30.0)),
                                y: Double.random(in: (40...60.0)))
         self.view.position = newPoint
+    }
+
+    public func displayBaloonNumber() {
+        self.displayNumber = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        self.displayNumber.text = String(self.model.number)
+        self.displayNumber.fontColor = .white
+        self.displayNumber.fontSize = 70
+        self.displayNumber.position = CGPoint(x: 0, y: -20)
+        self.displayNumber.zPosition = self.view.zPosition + CGFloat(1)
+        self.view.addChild(displayNumber)
     }
 }
