@@ -22,6 +22,7 @@
 		EFA6DB38265435B60037FA21 /* EnemyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */; };
 		EFA6DB3B265437530037FA21 /* BaloonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */; };
 		EFAFDF8D265D782C00E235CC /* UIImage+Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */; };
+		EFAFDF902660014000E235CC /* MNISTClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EFAFDF8F2660014000E235CC /* MNISTClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		EFA6DB37265435B60037FA21 /* EnemyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyViewModel.swift; sourceTree = "<group>"; };
 		EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaloonViewModel.swift; sourceTree = "<group>"; };
 		EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Shapes.swift"; sourceTree = "<group>"; };
+		EFAFDF8F2660014000E235CC /* MNISTClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MNISTClassifier.mlmodel; path = ../../../../../Downloads/MNISTClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				EF7C31612644542000658DEE /* GameScene.sks */,
 				EF7C31632644542000658DEE /* Actions.sks */,
 				EF7C31652644542000658DEE /* GameScene.swift */,
+				EFAFDF8F2660014000E235CC /* MNISTClassifier.mlmodel */,
 				EF7C31672644542000658DEE /* GameViewController.swift */,
 				EF7C31692644542000658DEE /* Main.storyboard */,
 				EF7C316C2644542000658DEE /* Assets.xcassets */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF5DCD82264467E300AA11D1 /* BaloonModel.swift in Sources */,
+				EFAFDF902660014000E235CC /* MNISTClassifier.mlmodel in Sources */,
 				EFAFDF8D265D782C00E235CC /* UIImage+Shapes.swift in Sources */,
 				EF894C26265A5BDB00BBD7DF /* MainMenu.swift in Sources */,
 				EF5DCD852644693800AA11D1 /* EnemyModel.swift in Sources */,

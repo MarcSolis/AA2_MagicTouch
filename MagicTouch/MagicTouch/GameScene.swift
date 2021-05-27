@@ -8,6 +8,8 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
+import Vision
+import CoreML
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
@@ -99,6 +101,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.button4.name = "Button4"
         self.button4.zPosition = 1010
         self.addChild(self.button4)
+        
+        self.textNode = SKLabelNode(text: "_")
+        self.addChild(self.textNode)
+        
+        self.myNode = SKSpriteNode()
+        self.addChild(self.myNode)
     }
 
     func getReusableEnemyIndex() -> Int {
@@ -238,7 +246,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
 
         let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
+        let newHeight = newWidth
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
         image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
 
@@ -266,17 +274,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.gameModel.freeformNode)
 
     }
-
+    var textNode : SKLabelNode!
+    var myNode : SKSpriteNode!
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        var image = UIImage.shapeImageWithBezierPath(
+            bezierPath: self.gameModel.bezierPath, fillColor: .clear, strokeColor: .white, strokeWidth: 40
+        )
 
-        guard let image = UIImage.shapeImageWithBezierPath(bezierPath: self.gameModel.bezierPath, fillColor: .clear, strokeColor: .red, strokeWidth: 10) else { return }
-        
-        let myNode = SKSpriteNode(texture: SKTexture(image: image))
-        myNode.zPosition = 2020
-        self.addChild(myNode)
+        image = resizeImage(image: image!, newWidth: CGFloat(28))
+        myNode.removeFromParent()
+         myNode = SKSpriteNode(texture: SKTexture(image: image!))
+         myNode.setScale(CGFloat(20))
+         myNode.zPosition = 2020
+         self.addChild(myNode)
 
         self.gameModel.freeformNode.removeFromParent()
         self.gameModel.bezierPath = UIBezierPath()
+
+        var recognizedNumber = -1
+
+        let model = MNISTClassifier()
+        do{
+            let input = try MNISTClassifierInput(imageWith: image!.cgImage!)
+            let result = try model.prediction(input: input)
+            recognizedNumber = Int(result.classLabel)
+            print(_:"----------------------" + String(result.labelProbabilities[result.classLabel]!) + "----------------------------------------")
+            print(_: result.labelProbabilities)
+        } catch {
+            recognizedNumber = -1
+        }
+        
+        textNode.removeFromParent()
+        textNode = SKLabelNode(text: String(recognizedNumber))
+        textNode.setScale(CGFloat(10))
+        textNode.position = CGPoint(x: 0, y: 200)
+        textNode.zPosition = 10000000
+        self.addChild(textNode)
+        
+        if recognizedNumber < 0 {return}
+        
+        destroyBaloons(identifier: recognizedNumber)
+        updateScore()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
