@@ -9,9 +9,16 @@ import UIKit
 
 extension UIImage {
 
-    class func shapeImageWithBezierPath(bezierPath: UIBezierPath, fillColor: UIColor?, strokeColor: UIColor?, strokeWidth: CGFloat = 0.0) -> UIImage! {
-        bezierPath.apply(CGAffineTransform(translationX: -bezierPath.bounds.origin.x + strokeWidth , y: -bezierPath.bounds.origin.y + strokeWidth ) )
-         let size = CGSize(width: bezierPath.bounds.width + strokeWidth * 2, height: bezierPath.bounds.height + strokeWidth * 2)
+    class func shapeImageWithBezierPath(
+        bezierPath: UIBezierPath, fillColor: UIColor?, strokeColor: UIColor?, strokeWidth: CGFloat = 0.0
+    ) -> UIImage! {
+        bezierPath.apply(CGAffineTransform(
+                            translationX: -bezierPath.bounds.origin.x + strokeWidth,
+                            y: -bezierPath.bounds.origin.y + strokeWidth))
+        let size = CGSize(
+            width: bezierPath.bounds.width + strokeWidth * 2,
+            height: bezierPath.bounds.height + strokeWidth * 2
+        )
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
         var image = UIImage()
@@ -21,7 +28,7 @@ extension UIImage {
             UIColor.black.setStroke()
             context.setLineWidth(10000)
             context.drawPath(using: .fillStroke)
-            
+
             context.addPath(bezierPath.cgPath)
             if strokeColor != nil {
                 strokeColor!.setStroke()

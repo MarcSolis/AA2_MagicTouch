@@ -25,10 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
 
-        initButtons()
-
         self.physicsWorld.contactDelegate = self
-
         self.gameModel = GameModel(matchTime: 0, screenSize: self.size, context: self)
         let screenRatio = (self.size.width + self.size.height) * 0.1
 
@@ -42,20 +39,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameModel.enemyPool[index].addAsChild(context: self)
         }
 
+        initScore()
+        initMultiplier()
+        initTimer()
+    }
+
+    func initScore() {
         self.score = SKLabelNode(fontNamed: "AvenirNext-Bold")
         self.score.text = ("Score: " + String(self.gameModel.score))
         self.score.position = CGPoint(x: 0, y: self.size.height/2 - 200)
         self.score.zPosition = 2000
         self.score.fontColor = UIColor.black
         self.addChild(self.score)
+    }
 
+    func initMultiplier() {
         self.multiplierText = SKLabelNode(fontNamed: "AvenirNext-Bold")
         self.multiplierText.text = "x" + String(1)
         self.multiplierText.position = CGPoint(x: 200, y: self.size.height/2 - 400)
         self.multiplierText.zPosition = 2000
         self.multiplierText.fontColor = UIColor.white
         self.addChild(self.multiplierText)
+    }
 
+    func initTimer() {
         let increaseTimeAction = SKAction.run {
             self.gameModel.time += self.gameModel.timeRefreshRate
         }
@@ -63,50 +70,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let timerActionGroup = SKAction.group([increaseTimeAction, waitForTimeAction])
         let runTimerAction = SKAction.repeatForever(timerActionGroup)
         run(runTimerAction, withKey: "TimerAction")
-    }
-
-    func initButtons() {
-        let buttonHeight = Int(-self.size.height/2 + 250)
-        self.button0 = SKShapeNode(circleOfRadius: 50)
-        self.button0.fillColor = UIColor.blue
-        self.button0.position = CGPoint(x: Int(-self.size.width/6*2), y: buttonHeight)
-        self.button0.name = "Button0"
-        self.button0.zPosition = 1010
-        self.addChild(self.button0)
-
-        self.button1 = SKShapeNode(circleOfRadius: 50)
-        self.button1.fillColor = UIColor.red
-        self.button1.position = CGPoint(x: Int(-self.size.width/6*1), y: buttonHeight)
-        self.button1.name = "Button1"
-        self.button1.zPosition = 1010
-        self.addChild(self.button1)
-
-        self.button2 = SKShapeNode(circleOfRadius: 50)
-        self.button2.fillColor = UIColor.green
-        self.button2.position = CGPoint(x: Int(-self.size.width/6*0), y: buttonHeight)
-        self.button2.name = "Button2"
-        self.button2.zPosition = 1010
-        self.addChild(self.button2)
-
-        self.button3 = SKShapeNode(circleOfRadius: 50)
-        self.button3.fillColor = UIColor.yellow
-        self.button3.position = CGPoint(x: Int(self.size.width/6*1), y: buttonHeight)
-        self.button3.name = "Button3"
-        self.button3.zPosition = 1010
-        self.addChild(self.button3)
-
-        self.button4 = SKShapeNode(circleOfRadius: 50)
-        self.button4.fillColor = UIColor.purple
-        self.button4.position = CGPoint(x: Int(self.size.width/6*2), y: buttonHeight)
-        self.button4.name = "Button4"
-        self.button4.zPosition = 1010
-        self.addChild(self.button4)
-        
-        self.textNode = SKLabelNode(text: "_")
-        self.addChild(self.textNode)
-        
-        self.myNode = SKSpriteNode()
-        self.addChild(self.myNode)
     }
 
     func getReusableEnemyIndex() -> Int {
@@ -240,12 +203,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             path.stroke()
         }
     }
-    
-
 
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
-
-        let scale = newWidth / image.size.width
         let newHeight = newWidth
         UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
         image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
@@ -274,20 +233,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(self.gameModel.freeformNode)
 
     }
-    var textNode : SKLabelNode!
-    var myNode : SKSpriteNode!
-    
+    var textNode: SKLabelNode!
+    var myNode: SKSpriteNode!
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         var image = UIImage.shapeImageWithBezierPath(
             bezierPath: self.gameModel.bezierPath, fillColor: .clear, strokeColor: .white, strokeWidth: 40
         )
 
         image = resizeImage(image: image!, newWidth: CGFloat(28))
-        myNode.removeFromParent()
-         myNode = SKSpriteNode(texture: SKTexture(image: image!))
-         myNode.setScale(CGFloat(20))
-         myNode.zPosition = 2020
-         self.addChild(myNode)
+        //if myNode != nil{
+        //    myNode.removeFromParent()
+        //}
+        //myNode = SKSpriteNode(texture: SKTexture(image: image!))
+        //myNode.setScale(CGFloat(20))
+        //myNode.zPosition = 2017
+        //self.addChild(myNode)
 
         self.gameModel.freeformNode.removeFromParent()
         self.gameModel.bezierPath = UIBezierPath()
@@ -295,25 +256,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var recognizedNumber = -1
 
         let model = MNISTClassifier()
-        do{
+        do {
             let input = try MNISTClassifierInput(imageWith: image!.cgImage!)
             let result = try model.prediction(input: input)
             recognizedNumber = Int(result.classLabel)
-            print(_:"----------------------" + String(result.labelProbabilities[result.classLabel]!) + "----------------------------------------")
-            print(_: result.labelProbabilities)
+            print(_: result)
+            // print(_:"----------------------" +
+            //             String(result.labelProbabilities[result.classLabel]!) +
+            //             "----------------------------------------")
+            // print(_: result.labelProbabilities)
         } catch {
             recognizedNumber = -1
         }
-        
-        textNode.removeFromParent()
-        textNode = SKLabelNode(text: String(recognizedNumber))
-        textNode.setScale(CGFloat(10))
-        textNode.position = CGPoint(x: 0, y: 200)
-        textNode.zPosition = 10000000
-        self.addChild(textNode)
-        
+
+        // textNode.removeFromParent()
+        // textNode = SKLabelNode(text: String(recognizedNumber))
+        // textNode.setScale(CGFloat(10))
+        // textNode.fontColor = .red
+        // textNode.color = .red
+        // textNode.position = CGPoint(x: 0, y: 200)
+        // textNode.zPosition = 2019
+        // self.addChild(textNode)
+
         if recognizedNumber < 0 {return}
-        
+
         destroyBaloons(identifier: recognizedNumber)
         updateScore()
     }
