@@ -12,9 +12,13 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
     public var gameSceneController: GameViewController!
     private var playButton: SKShapeNode!
     private var playButtonText: SKLabelNode!
+    private var scor: Int!
     private var scoreText: SKLabelNode!
+    private let scoreDataKey = "MaxScore"
+    let defaults = UserDefaults.standard
 
     override func didMove(to view: SKView) {
+
         self.playButton = SKShapeNode(rect: CGRect(x: -150, y: -75, width: 300, height: 150))
         self.playButton.fillColor = UIColor.blue
         self.playButton.position = CGPoint(x: 0, y: 0)
@@ -39,8 +43,18 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
         self.scoreText.isUserInteractionEnabled = false
     }
 
-    public func showScore(score: Int) {
-        self.scoreText.text = "Score: " + String(score)
+    public func showScore() {
+        if defaults.object(forKey: scoreDataKey) != nil {
+            if  let readeData = (defaults.object(forKey: scoreDataKey)) as? Int {
+                self.gameSceneController.refreshScore(newScore: readeData)
+            }
+        }
+        self.scoreText.text = "Max score: " + String(self.gameSceneController.maxScore)
+        saveMaxScore()
+    }
+
+    public func saveMaxScore() {
+        defaults.setValue(self.gameSceneController.maxScore, forKey: scoreDataKey)
     }
 
     func touchDown(atPoint pos: CGPoint) {

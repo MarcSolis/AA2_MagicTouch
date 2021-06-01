@@ -36,7 +36,7 @@ class GameViewController: UIViewController {
             } else if sceneName == "MainMenu" {
                 if let mainMenuView = view?.scene as? MainMenu? {
                     mainMenuView?.gameSceneController = self
-                    mainMenuView?.showScore(score: maxScore)
+                    mainMenuView?.showScore()
                 }
             }
 
