@@ -23,6 +23,7 @@
 		EFA6DB3B265437530037FA21 /* BaloonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */; };
 		EFAFDF8D265D782C00E235CC /* UIImage+Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */; };
 		EFAFDF902660014000E235CC /* MNISTClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = EFAFDF8F2660014000E235CC /* MNISTClassifier.mlmodel */; };
+		EFE5D8D526694CD7003B1344 /* CGVector+Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE5D8D426694CD7003B1344 /* CGVector+Sum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		EFA6DB3A265437530037FA21 /* BaloonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaloonViewModel.swift; sourceTree = "<group>"; };
 		EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Shapes.swift"; sourceTree = "<group>"; };
 		EFAFDF8F2660014000E235CC /* MNISTClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = MNISTClassifier.mlmodel; path = ../../../../../Downloads/MNISTClassifier.mlmodel; sourceTree = "<group>"; };
+		EFE5D8D426694CD7003B1344 /* CGVector+Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Sum.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				EFAFDF8C265D782C00E235CC /* UIImage+Shapes.swift */,
+				EFE5D8D426694CD7003B1344 /* CGVector+Sum.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				EFAFDF902660014000E235CC /* MNISTClassifier.mlmodel in Sources */,
 				EFAFDF8D265D782C00E235CC /* UIImage+Shapes.swift in Sources */,
 				EF894C26265A5BDB00BBD7DF /* MainMenu.swift in Sources */,
+				EFE5D8D526694CD7003B1344 /* CGVector+Sum.swift in Sources */,
 				EF5DCD852644693800AA11D1 /* EnemyModel.swift in Sources */,
 				EF7C31662644542000658DEE /* GameScene.swift in Sources */,
 				EF7C31682644542000658DEE /* GameViewController.swift in Sources */,

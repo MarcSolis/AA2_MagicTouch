@@ -186,14 +186,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         freeformNode.lineWidth = 10
 
         self.addChild(freeformNode)
-
-        // freeform.lineWidth = 10
-        // freeform.stroke()
-        // let mySKNode = SKShapeNode(path: freeform.cgPath)
-        // mySKNode.lineWidth = 10
-        // mySKNode.strokeColor = UIColor.black
-        // mySKNode.zPosition = 2020
-        // self.addChild(mySKNode)
     }
 
     func renderPath(path: UIBezierPath, size: CGSize) -> UIImage? {
@@ -242,13 +234,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         )
 
         image = resizeImage(image: image!, newWidth: CGFloat(28))
-        //if myNode != nil{
-        //    myNode.removeFromParent()
-        //}
-        //myNode = SKSpriteNode(texture: SKTexture(image: image!))
-        //myNode.setScale(CGFloat(20))
-        //myNode.zPosition = 2017
-        //self.addChild(myNode)
 
         self.gameModel.freeformNode.removeFromParent()
         self.gameModel.bezierPath = UIBezierPath()
@@ -261,22 +246,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let result = try model.prediction(input: input)
             recognizedNumber = Int(result.classLabel)
             print(_: result)
-            // print(_:"----------------------" +
-            //             String(result.labelProbabilities[result.classLabel]!) +
-            //             "----------------------------------------")
-            // print(_: result.labelProbabilities)
         } catch {
             recognizedNumber = -1
         }
-
-        // textNode.removeFromParent()
-        // textNode = SKLabelNode(text: String(recognizedNumber))
-        // textNode.setScale(CGFloat(10))
-        // textNode.fontColor = .red
-        // textNode.color = .red
-        // textNode.position = CGPoint(x: 0, y: 200)
-        // textNode.zPosition = 2019
-        // self.addChild(textNode)
 
         if recognizedNumber < 0 {return}
 
@@ -298,7 +270,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         if self.gameModel.time - self.gameModel.lastSpawnedTime >= self.gameModel.spawnInterval {
-            self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(initialPos: self.gameModel.spawnEnemyPosition)
+            let horizontalVariation = Float.random(in: 0...Float(self.size.width/1.5)) - Float(self.size.width/1.5)/2
+            self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(
+                initialPos: CGPoint(
+                    x: CGFloat(horizontalVariation) + self.gameModel.spawnEnemyPosition.x,
+                    y: self.gameModel.spawnEnemyPosition.y
+                ),
+                time: self.gameModel.time
+            )
             self.gameModel.lastSpawnedTime = self.gameModel.time
             self.gameModel.spawnInterval = Float.random(in: 2...5)
         }

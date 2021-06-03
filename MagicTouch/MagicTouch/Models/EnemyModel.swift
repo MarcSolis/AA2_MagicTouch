@@ -15,6 +15,7 @@ class EnemyModel {
     var active: Bool
     var activeBaloons: Int
     let movementSpeed: CGVector
+    let increaseSpeedByTimeMuttiplier: Float = 2
 
     init() {
         skinId = 0
