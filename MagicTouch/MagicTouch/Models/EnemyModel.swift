@@ -14,15 +14,13 @@ class EnemyModel {
     var points: Int
     var active: Bool
     var activeBaloons: Int
-    let movementSpeed: CGVector
-    let increaseSpeedByTimeMuttiplier: Float = 2
+
 
     init() {
         skinId = 0
         points = 0
         ballons = []
         active = false
-        movementSpeed = CGVector(dx: 0, dy: -80)
         activeBaloons = 0
     }
 

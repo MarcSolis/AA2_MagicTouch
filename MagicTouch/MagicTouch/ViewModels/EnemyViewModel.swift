@@ -52,21 +52,17 @@ class EnemyViewModel {
         return 0
     }
 
-    public func reuse(initialPos: CGPoint, time: Float) {
+    public func reuse(initialPos: CGPoint, velocity: CGVector) {
         self.view.position = initialPos
         self.model.reuseBaloons()
         self.model.active = true
-        self.view.physicsBody!.velocity = CGVector.sum(
-            value1: self.model.movementSpeed,
-            value2: CGVector(dx: 0, dy: -CGFloat(time * self.model.increaseSpeedByTimeMuttiplier))
-        )
+        updateSpeed(velocity: velocity)
+    }
+    
+    public func updateSpeed(velocity: CGVector){
+        self.view.physicsBody!.velocity = velocity
         (0...self.model.ballons.count-1).forEach { (index) in
-            self.model.ballons[index].setVelocity(
-                velocity: CGVector.sum(
-                    value1: self.model.movementSpeed,
-                    value2: CGVector(dx: 0, dy: -CGFloat(time * self.model.increaseSpeedByTimeMuttiplier))
-                )
-            )
+            self.model.ballons[index].setVelocity(velocity: velocity)
         }
     }
 

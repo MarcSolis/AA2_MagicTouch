@@ -25,6 +25,8 @@ struct GameModel {
     var strokePoints: [CGPoint]!
     var bezierPath: UIBezierPath!
     var freeformNode: SKShapeNode!
+    let enemyStartSpeed = CGVector(dx: 0, dy: -80)
+    let increaseSpeedByTimeMuttiplier: Float = 2
 
     init(matchTime: Float, screenSize: CGSize, context: GameScene) {
         self.score = 0

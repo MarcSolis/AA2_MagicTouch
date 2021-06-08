@@ -269,6 +269,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ currentTime: TimeInterval) {
+        let newVelocity = CGVector.sum(
+            value1: self.gameModel.enemyStartSpeed,
+            value2: CGVector(dx: 0, dy: -CGFloat(self.gameModel.time * self.gameModel.increaseSpeedByTimeMuttiplier))
+        )
+        (0...self.gameModel.enemyPoolSize).forEach { (index) in
+            if self.gameModel.enemyPool[index].model.active {
+                self.gameModel.enemyPool[index].updateSpeed(velocity: newVelocity)
+            }
+        }
         if self.gameModel.time - self.gameModel.lastSpawnedTime >= self.gameModel.spawnInterval {
             let horizontalVariation = Float.random(in: 0...Float(self.size.width/1.5)) - Float(self.size.width/1.5)/2
             self.gameModel.enemyPool[getReusableEnemyIndex()].reuse(
@@ -276,7 +285,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     x: CGFloat(horizontalVariation) + self.gameModel.spawnEnemyPosition.x,
                     y: self.gameModel.spawnEnemyPosition.y
                 ),
-                time: self.gameModel.time
+                velocity: newVelocity
             )
             self.gameModel.lastSpawnedTime = self.gameModel.time
             self.gameModel.spawnInterval = Float.random(in: 2...5)
