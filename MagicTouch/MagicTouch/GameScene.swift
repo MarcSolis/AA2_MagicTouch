@@ -15,12 +15,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private var gameModel: GameModel!
     public var gameSceneController: GameViewController!
-    private var button0: SKShapeNode!
-    private var button1: SKShapeNode!
-    private var button2: SKShapeNode!
-    private var button3: SKShapeNode!
-    private var button4: SKShapeNode!
     private var score: SKLabelNode!
+    private var scoreBackground: SKSpriteNode!
+
     private var multiplierText: SKLabelNode!
 
     override func didMove(to view: SKView) {
@@ -45,10 +42,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func initScore() {
+        self.scoreBackground = SKSpriteNode(imageNamed: "Cloud")
+        self.scoreBackground.position = CGPoint(x: 0, y: self.size.height/2 - 180)
+        self.scoreBackground.size = CGSize(
+            width: self.scoreBackground.size.width/1.4,
+            height: self.scoreBackground.size.height/1.8
+        )
+        self.scoreBackground.zPosition = 2000
+        self.addChild(self.scoreBackground)
         self.score = SKLabelNode(fontNamed: "AvenirNext-Bold")
         self.score.text = ("Score: " + String(self.gameModel.score))
         self.score.position = CGPoint(x: 0, y: self.size.height/2 - 200)
-        self.score.zPosition = 2000
+        self.score.zPosition = 2001
         self.score.fontColor = UIColor.black
         self.addChild(self.score)
     }
