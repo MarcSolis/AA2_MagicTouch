@@ -15,12 +15,16 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
     private var scor: Int!
     private var scoreText: SKLabelNode!
     private let scoreDataKey = "MaxScore"
+    private let background = SKSpriteNode(imageNamed: "Background")
+    private let castle = SKSpriteNode(imageNamed: "Castle")
+    private let ground = SKSpriteNode(imageNamed: "Ground")
     let defaults = UserDefaults.standard
 
     override func didMove(to view: SKView) {
+        initBackground()
 
-        self.playButton = SKShapeNode(rect: CGRect(x: -150, y: -75, width: 300, height: 150))
-        self.playButton.fillColor = UIColor.blue
+        self.playButton = SKShapeNode(rect: CGRect(x: -150, y: -75, width: 300, height: 150), cornerRadius: 15)
+        self.playButton.fillColor = UIColor.orange
         self.playButton.position = CGPoint(x: 0, y: 0)
         self.playButton.name = "playButton"
         self.playButton.zPosition = 1010
@@ -41,6 +45,33 @@ class MainMenu: SKScene, SKPhysicsContactDelegate {
         self.scoreText.position = CGPoint(x: 0, y: self.size.height/2 - 200)
         self.scoreText.fontSize = 40
         self.scoreText.isUserInteractionEnabled = false
+    }
+    
+    public func initBackground(){
+        self.background.size = self.size
+        self.background.position = CGPoint(x: 0, y: 0)
+        self.background.zPosition = 1
+        self.background.isUserInteractionEnabled = false
+        self.addChild(self.background)
+
+        self.castle.size = CGSize(width: self.size.width, height: self.size.width/1.5)
+        self.castle.anchorPoint = CGPoint(x: 0.5, y: 0)
+        self.castle.position = CGPoint(x: 0, y: -self.size.height/2+80)
+        self.castle.zPosition = 2
+        self.castle.isUserInteractionEnabled = false
+        self.addChild(self.castle)
+
+        self.ground.size = CGSize(width: self.size.width, height: self.size.width/9)
+        self.ground.anchorPoint = CGPoint(x: 0.5, y: 0)
+        self.ground.position = CGPoint(x: 0, y: -self.size.height/2+80)
+        self.ground.zPosition = 3
+        self.ground.name = "Ground"
+        self.ground.physicsBody = SKPhysicsBody(rectangleOf: self.ground.size)
+        self.ground.physicsBody!.affectedByGravity = false
+        self.ground.physicsBody!.isDynamic = false
+        self.ground.physicsBody!.collisionBitMask = 0x00000100
+        self.ground.isUserInteractionEnabled = false
+        self.addChild(self.ground)
     }
 
     public func showScore() {
